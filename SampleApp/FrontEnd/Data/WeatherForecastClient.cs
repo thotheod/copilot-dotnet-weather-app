@@ -11,15 +11,21 @@ namespace FrontEnd.Data
             _logger = logger;
         }
 
-        public async Task<WeatherForecast[]> GetForecastAsync(DateTime? startDate)
+        public Task<WeatherForecast[]> GetForecastAsync(DateTime? startDate)
         {
-            var forecasts = await _httpClient.GetFromJsonAsync<WeatherForecast[]>($"WeatherForecast?startDate={startDate}");
+            _logger.LogInformation("Starting GetForecastAsync method.");
+            var forecasts = _httpClient.GetFromJsonAsync<WeatherForecast[]>($"WeatherForecast?startDate={startDate}").Result;
             if (forecasts == null)
             {
                 _logger.LogWarning("Received null response from WeatherForecast API.");
-                return Array.Empty<WeatherForecast>();
+                if (forecasts == null)
+                {
+                    _logger.LogError("Forecasts is still null.");
+                    return Task.FromResult(new WeatherForecast[0]);
+                }
             }
-            return forecasts;
+            _logger.LogInformation("Returning forecasts.");
+            return Task.FromResult(forecasts);
         }
     }
 }
