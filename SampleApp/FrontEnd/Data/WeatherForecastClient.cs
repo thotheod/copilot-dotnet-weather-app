@@ -12,6 +12,14 @@ namespace FrontEnd.Data
         }
 
         public async Task<WeatherForecast[]> GetForecastAsync(DateTime? startDate)
-            => await _httpClient.GetFromJsonAsync<WeatherForecast[]>($"WeatherForecast?startDate={startDate}");
+        {
+            var forecasts = await _httpClient.GetFromJsonAsync<WeatherForecast[]>($"WeatherForecast?startDate={startDate}");
+            if (forecasts == null)
+            {
+                _logger.LogWarning("Received null response from WeatherForecast API.");
+                return Array.Empty<WeatherForecast>();
+            }
+            return forecasts;
+        }
     }
 }
