@@ -1,0 +1,42 @@
+{
+    "name": ".NET in Codespaces",
+    "image": "mcr.microsoft.com/dotnet/sdk:8.0",
+    "remoteUser": "vscode",	
+    "features": {
+        "ghcr.io/devcontainers/features/powershell:1": {
+            "version": "latest"
+        },
+        "ghcr.io/devcontainers/features/common-utils:2": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "GitHub.copilot",
+                "ms-dotnettools.csdevkit",
+                "ms-dotnetools.csharp"
+            ]
+        }
+    },
+    "forwardPorts": [
+        8080,
+        8081
+    ],
+    "hostRequirements": {
+        "memory": "8gb",
+        "cpus": 4
+    },
+    "remoteEnv": {
+        "DOTNET_MULTILEVEL_LOOKUP": "0",
+        "TARGET": "net8.0"
+    },
+    "portsAttributes": {
+        "8080": {
+            "label": "Weather API",
+            "onAutoForward": "notify"
+        },
+        "8081": {
+            "label": "Weather Front End",
+            "onAutoForward": "notify"
+        }
+    }
+}

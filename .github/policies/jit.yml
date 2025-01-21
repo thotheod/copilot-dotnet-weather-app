@@ -1,0 +1,15 @@
+name: JIT Auto Approve
+description: Auto approve for anyone with Maintain role
+
+resource: repository
+
+configuration:
+    jitAccess:
+        enabled: true
+        maxHours: 2
+        approvers:
+            role:
+            users:
+        requestors:
+            role: Maintain
+            users:
