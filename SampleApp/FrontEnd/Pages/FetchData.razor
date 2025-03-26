@@ -20,6 +20,7 @@ else
                 <th>Date</th>
                 <th>Temp. (C)</th>
                 <th>Temp. (F)</th>
+                <th>Temp. (K)</th> <!-- Added column for Kelvin -->
                 <th>Summary</th>
             </tr>
         </thead>
@@ -30,6 +31,7 @@ else
                     <td>@forecast.Date.ToShortDateString()</td>
                     <td>@forecast.TemperatureC</td>
                     <td>@forecast.TemperatureF</td>
+                    <td>@forecast.TemperatureK</td> <!-- Display Kelvin -->
                     <td>@forecast.Summary</td>
                 </tr>
             }
